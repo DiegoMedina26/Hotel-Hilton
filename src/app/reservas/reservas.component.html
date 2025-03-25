@@ -1,0 +1,77 @@
+<div class="container mt-5">
+  <h2 class="mb-4">Formulario de Reserva - Hilton</h2>
+
+  <form (ngSubmit)="onSubmit()" class="p-4 border rounded shadow">
+    <!-- Región -->
+    <div class="mb-3">
+      <label for="region" class="form-label">Región</label>
+      <select id="region" class="form-select" [(ngModel)]="reserva.region" name="region" (change)="reserva.pais=''; reserva.ciudad='';">
+        <option value="" disabled selected>Selecciona una región</option>
+        <option *ngFor="let region of (hotelesHilton | keyvalue)" [value]="region.key">{{ region.key }}</option>
+      </select>
+    </div>
+
+    <!-- País -->
+    <div class="mb-3" *ngIf="reserva.region">
+      <label for="pais" class="form-label">País</label>
+      <select id="pais" class="form-select" [(ngModel)]="reserva.pais" name="pais" (change)="actualizarCiudades()">
+        <option value="" disabled selected>Selecciona un país</option>
+        <option *ngFor="let pais of (hotelesHilton[reserva.region] | keyvalue)" [value]="pais.key">{{ pais.key }}</option>
+      </select>
+    </div>
+
+    <!-- Ciudad / Hotel -->
+    <div class="mb-3" *ngIf="reserva.pais">
+      <label for="ciudad" class="form-label">Hotel / Ciudad</label>
+      <select id="ciudad" class="form-select" [(ngModel)]="reserva.ciudad" name="ciudad">
+        <option value="" disabled selected>Selecciona un hotel</option>
+        <option *ngFor="let ciudad of ciudades" [value]="ciudad">{{ ciudad }}</option>
+      </select>
+    </div>
+
+    <!-- Nombre -->
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre Completo</label>
+      <input type="text" class="form-control" id="nombre" [(ngModel)]="reserva.nombre" name="nombre" required>
+    </div>
+
+    <!-- Correo -->
+    <div class="mb-3">
+      <label for="correo" class="form-label">Correo Electrónico</label>
+      <input type="email" class="form-control" id="correo" [(ngModel)]="reserva.correo" name="correo" required>
+    </div>
+
+    <!-- Fecha de Ingreso -->
+    <div class="mb-3">
+      <label for="fechaIngreso" class="form-label">Fecha de Ingreso</label>
+      <input type="date" class="form-control" id="fechaIngreso" [(ngModel)]="reserva.fechaIngreso" name="fechaIngreso" required>
+    </div>
+
+    <!-- Fecha de Salida -->
+    <div class="mb-3">
+      <label for="fechaSalida" class="form-label">Fecha de Salida</label>
+      <input type="date" class="form-control" id="fechaSalida" [(ngModel)]="reserva.fechaSalida" name="fechaSalida" required>
+    </div>
+
+    <!-- Número de Personas -->
+    <div class="mb-3">
+      <label for="personas" class="form-label">Número de Personas</label>
+      <input type="number" class="form-control" id="personas" [(ngModel)]="reserva.personas" name="personas" min="1" required>
+    </div>
+
+    <!-- Método de Pago -->
+    <div class="mb-3">
+      <label for="metodoPago" class="form-label">Método de Pago</label>
+      <select id="metodoPago" class="form-select" [(ngModel)]="reserva.metodoPago" name="metodoPago" required>
+        <option value="" disabled selected>Selecciona un método de pago</option>
+        <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+        <option value="Tarjeta de Débito">Tarjeta de Débito</option>
+        <option value="Paypal">Paypal</option>
+        <option value="Transferencia Bancaria">Transferencia Bancaria</option>
+      </select>
+    </div>
+
+    <!-- Botón de enviar -->
+    <button type="submit" class="btn btn-primary w-100">Reservar</button>
+  </form>
+</div>

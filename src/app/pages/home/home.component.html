@@ -1,0 +1,154 @@
+<div class="container text-center mt-5">
+
+  <div class="p-4 shadow rounded bg-white mb-5">
+    <form (ngSubmit)="buscarHotel()">
+      <div class="row align-items-end g-3">
+
+        <!-- Destino con SELECTOR -->
+        <div class="col-md-4">
+          <label for="destino" class="form-label fw-bold">¿A dónde? <span
+              class="text-muted">(Obligatorio)</span></label>
+          <select class="form-select" id="destino" name="destino" [(ngModel)]="destino" required>
+            <option value="" disabled selected>Seleccione una ubicación</option>
+            <option value="Hilton New York Times Square">Hilton New York Times Square - USA</option>
+            <option value="Hilton Miami Downtown">Hilton Miami Downtown - USA</option>
+            <option value="Hilton Los Angeles Airport">Hilton Los Angeles Airport - USA</option>
+            <option value="Hilton Cartagena">Hilton Cartagena - Colombia</option>
+            <option value="Hilton Bogotá">Hilton Bogotá - Colombia</option>
+            <option value="Hilton Buenos Aires">Hilton Buenos Aires - Argentina</option>
+            <option value="Hilton London Metropole">Hilton London Metropole - Reino Unido</option>
+            <option value="Hilton Paris Opera">Hilton Paris Opera - Francia</option>
+            <option value="Hilton Dubai Jumeirah">Hilton Dubai Jumeirah - Emiratos Árabes</option>
+            <option value="Hilton Tokyo">Hilton Tokyo - Japón</option>
+            <option value="Hilton San Francisco Union Square">Hilton San Francisco Union Square - USA</option>
+            <option value="Hilton Orlando">Hilton Orlando - USA</option>
+            <option value="Hilton Chicago">Hilton Chicago - USA</option>
+            <option value="Hilton Lima Miraflores">Hilton Lima Miraflores - Perú</option>
+            <option value="Hilton Rio de Janeiro Copacabana">Hilton Rio de Janeiro Copacabana - Brasil</option>
+            <option value="Hilton Mexico City Reforma">Hilton Mexico City Reforma - México</option>
+            <option value="Hilton Garden Inn Santiago Airport">Hilton Garden Inn Santiago Airport - Chile</option>
+            <option value="Hilton Munich Park">Hilton Munich Park - Alemania</option>
+            <option value="Hilton Barcelona">Hilton Barcelona - España</option>
+            <option value="Hilton Sydney">Hilton Sydney - Australia</option>
+            <option value="Hilton Kuala Lumpur">Hilton Kuala Lumpur - Malasia</option>
+            <option value="Hilton Singapore Orchard">Hilton Singapore Orchard - Singapur</option>
+            <option value="Hilton Beijing">Hilton Beijing - China</option>
+            <option value="Hilton Vienna Park">Hilton Vienna Park - Austria</option>
+            <option value="Hilton Amsterdam">Hilton Amsterdam - Países Bajos</option>
+            <option value="Hilton Atlanta">Hilton Atlanta - USA</option>
+            <option value="Hilton Hawaiian Village Waikiki Beach Resort">Hilton Hawaiian Village Waikiki Beach Resort -
+              USA</option>
+            <option value="Hilton San Diego Bayfront">Hilton San Diego Bayfront - USA</option>
+            <option value="Hilton Garden Inn Panama City Downtown">Hilton Garden Inn Panama City Downtown - Panamá
+            </option>
+            <option value="Hilton Santa Marta">Hilton Santa Marta - Colombia</option>
+            <option value="Hilton Guayaquil">Hilton Guayaquil - Ecuador</option>
+            <option value="Hilton Sao Paulo Morumbi">Hilton Sao Paulo Morumbi - Brasil</option>
+            <option value="Hilton Garden Inn Montevideo">Hilton Garden Inn Montevideo - Uruguay</option>
+            <option value="Hilton Prague">Hilton Prague - República Checa</option>
+            <option value="Hilton Budapest">Hilton Budapest - Hungría</option>
+            <option value="Hilton Milan">Hilton Milan - Italia</option>
+            <option value="Hilton Malta">Hilton Malta - Malta</option>
+            <option value="Hilton Seychelles Northolme Resort & Spa">Hilton Seychelles Northolme Resort & Spa -
+              Seychelles</option>
+            <option value="Hilton Cairo Zamalek Residences">Hilton Cairo Zamalek Residences - Egipto</option>
+            <option value="Hilton Addis Ababa">Hilton Addis Ababa - Etiopía</option>
+            <option value="Hilton Garden Inn Nairobi Airport">Hilton Garden Inn Nairobi Airport - Kenia</option>
+            <option value="Hilton Beirut Metropolitan Palace">Hilton Beirut Metropolitan Palace - Líbano</option>
+            <option value="Hilton Istanbul Bomonti Hotel & Conference Center">Hilton Istanbul Bomonti Hotel & Conference
+              Center - Turquía</option>
+            <option value="Hilton Doha">Hilton Doha - Catar</option>
+            <option value="Hilton Bahrain">Hilton Bahrain - Baréin</option>
+          </select>
+        </div>
+
+        <!-- Fecha de entrada -->
+        <div class="col-md-2">
+          <label for="checkin" class="form-label fw-bold">Check-in</label>
+          <input type="date" class="form-control" [(ngModel)]="checkin" name="checkin" required>
+        </div>
+
+        <!-- Fecha de salida -->
+        <div class="col-md-2">
+          <label for="checkout" class="form-label fw-bold">Check-out</label>
+          <input type="date" class="form-control" [(ngModel)]="checkout" name="checkout" required>
+        </div>
+
+        <!-- Habitaciones -->
+        <div class="col-md-2">
+          <label for="habitaciones" class="form-label fw-bold">Habitaciones</label>
+          <input type="number" class="form-control" [(ngModel)]="habitaciones" name="habitaciones" min="1" value="1"
+            required>
+        </div>
+
+        <!-- Huéspedes -->
+        <div class="col-md-2">
+          <label for="huespedes" class="form-label fw-bold">Huéspedes</label>
+          <input type="number" class="form-control" [(ngModel)]="huespedes" name="huespedes" min="1" value="1" required>
+
+        </div>
+
+        <!-- Botón -->
+        <div class="col-md-12 text-end">
+          <button type="submit" class="btn btn-primary">Buscar Hotel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <h1 class="display-4">Bienvenido a Hotel Hilton</h1>
+  <p class="lead">Disfruta de una experiencia inolvidable en el lugar donde el lujo y la comodidad se encuentran</p>
+  <img src="assets/img/HotelPrincipal.jpeg" class="img-fluid rounded shadow mb-4" alt="Hotel Image">
+
+  <div class="row mt-5">
+    <div class="col-md-4">
+      <i class="bi bi-cup-hot display-4 text-primary"></i>
+      <h4 class="mt-3">Desayuno Incluido</h4>
+      <p>Disfruta cada mañana de un delicioso desayuno buffet con variedad de opciones.</p>
+    </div>
+    <div class="col-md-4">
+      <i class="bi bi-wifi display-4 text-primary"></i>
+      <h4 class="mt-3">Wi-Fi Gratis</h4>
+      <p>Conéctate en cualquier parte del hotel con nuestra red de alta velocidad.</p>
+    </div>
+    <div class="col-md-4">
+      <i class="bi bi-water display-4 text-primary"></i>
+      <h4 class="mt-3">Piscina y Spa</h4>
+      <p>Relájate y disfruta de nuestra piscina climatizada y tratamientos de spa exclusivos.</p>
+    </div>
+  </div>
+
+  <div class="mt-5 p-4 bg-light rounded shadow">
+    <h3>Reserva Ahora y vive la experiencia Hilton</h3>
+    <p>Disfruta de nuestras habitaciones de lujo, atención personalizada y las mejores instalaciones.</p>
+    <a routerLink="/reserva" class="btn btn-primary">Haz tu Reserva</a>
+  </div>
+
+  <div class="mt-5">
+    <blockquote class="blockquote">
+      <p class="mb-0">"No vendemos habitaciones, creamos experiencias memorables"</p>
+    </blockquote>
+  </div>
+</div>
+<!-- BACKDROP -->
+<div class="modal-backdrop" *ngIf="loginClienteVisible" (click)="cerrarLoginCliente()"></div>
+
+<!-- MODAL LOGIN CLIENTE -->
+<div class="modal-login" *ngIf="loginClienteVisible">
+  <div class="card p-4">
+    <h3>Login Cliente</h3>
+    <form (ngSubmit)="loginCliente()" #loginForm="ngForm">
+      <div class="mb-3">
+        <label>Usuario</label>
+        <input type="text" class="form-control" [(ngModel)]="usuarioCliente" name="usuario" required>
+      </div>
+      <div class="mb-3">
+        <label>Contraseña</label>
+        <input type="password" class="form-control" [(ngModel)]="passwordCliente" name="password" required>
+      </div>
+      <button type="submit" class="btn btn-success w-100">Ingresar</button>
+    </form>
+  </div>
+</div>
