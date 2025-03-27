@@ -10,13 +10,7 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/" routerLinkActive="active">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/nosotros" routerLinkActive="active">Nosotros</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/galeria" routerLinkActive="active">Galería</a>
-        </li>
-
+        
         <!-- CLIENTE abre el modal -->
         <li class="nav-item" *ngIf="!clienteLogueado">
           <a class="nav-link" (click)="mostrarLoginCliente()">Iniciar Sesión Cliente</a>
@@ -27,11 +21,7 @@
           <span class="nav-link">Bienvenido, {{ nombreCliente }}</span>
           <a class="nav-link text-danger" (click)="logoutCliente()">Cerrar Sesión</a>
         </li>
-
-        <!-- LOGIN ADMINISTRATIVO normal -->
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
-        </li>
+        
       </ul>
     </div>
   </div>

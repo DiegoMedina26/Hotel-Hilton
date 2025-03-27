@@ -123,7 +123,6 @@
   <div class="mt-5 p-4 bg-light rounded shadow">
     <h3>Reserva Ahora y vive la experiencia Hilton</h3>
     <p>Disfruta de nuestras habitaciones de lujo, atención personalizada y las mejores instalaciones.</p>
-    <a routerLink="/reserva" class="btn btn-primary">Haz tu Reserva</a>
   </div>
 
   <div class="mt-5">
@@ -132,6 +131,115 @@
     </blockquote>
   </div>
 </div>
+
+<div class="container mt-5 text-center">
+  <h2 class="display-5">Sobre Nosotros</h2>
+  <p class="lead">Más que un hotel, somos el lugar donde tus sueños se convierten en experiencias inolvidables.</p>
+
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <img src="assets/img/nosotros.jpg" class="img-fluid rounded shadow" alt="Nosotros Hotel Hilton">
+    </div>
+    <div class="col-md-6 text-start">
+      <p>
+        En <strong>Hotel Hilton</strong> contamos con más de <strong>20 años de experiencia</strong> ofreciendo
+        hospitalidad de primer nivel. Nuestro compromiso es brindar un servicio personalizado, garantizando que cada huésped viva una estadía de lujo, confort y tranquilidad.
+      </p>
+      <p>
+        Nuestras instalaciones están diseñadas para satisfacer las necesidades de viajeros de negocios, familias y parejas que buscan una experiencia única.
+      </p>
+      <ul>
+        <li>✔️ Habitaciones elegantes y cómodas</li>
+        <li>✔️ Restaurantes de clase mundial</li>
+        <li>✔️ Piscinas y zonas de relajación</li>
+        <li>✔️ Spa y gimnasio totalmente equipados</li>
+        <li>✔️ Salones para eventos y reuniones</li>
+        <li>✔️ Atención al cliente 24/7</li>
+      </ul>
+      <p>
+        Nos apasiona crear recuerdos inolvidables para ti y tu familia. ¡Te esperamos!
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-5 bg-light p-4 rounded shadow">
+    <h4>¿Por qué elegirnos?</h4>
+    <p>Porque en Hotel Hilton no solo te hospedamos, sino que te brindamos una experiencia inigualable, donde cada detalle está pensado para tu confort y felicidad.</p>
+  </div>
+</div>
+
+<div class="container my-5">
+  <h2 class="display-5 text-center">Galería</h2>
+  <p class="lead text-center">Descubre nuestros espacios pensados para tu confort y disfrute.</p>
+
+  <div id="hotelCarousel" class="carousel slide shadow rounded" data-bs-ride="carousel">
+    
+    <!-- Indicadores -->
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="2"></button>
+      <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="3"></button>
+      <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="4"></button>
+      <button type="button" data-bs-target="#hotelCarousel" data-bs-slide-to="5"></button>
+    </div>
+
+    <!-- Imágenes -->
+    <div class="carousel-inner rounded">
+      <div class="carousel-item active">
+        <img src="assets/img/vista.jpeg" class="d-block w-100" alt="Vista del hotel">
+        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+          <h5>Vista Panorámica</h5>
+          <p>Disfruta de una vista increíble desde nuestras instalaciones.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="assets/img/eventos.jpeg" class="d-block w-100" alt="Eventos">
+        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+          <h5>Salón de Eventos</h5>
+          <p>Espacios ideales para tus celebraciones y reuniones.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="assets/img/spa.jpeg" class="d-block w-100" alt="Zona de spa">
+        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+          <h5>Zona de Spa</h5>
+          <p>Relájate y renueva tus energías en nuestro spa exclusivo.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="assets/img/restaurante.jpeg" class="d-block w-100" alt="Restaurante">
+        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+          <h5>Restaurante Gourmet</h5>
+          <p>Una experiencia gastronómica única para todos los gustos.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="assets/img/piscina.jpeg" class="d-block w-100" alt="Piscina del hotel">
+        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+          <h5>Piscina</h5>
+          <p>Un espacio refrescante rodeado de naturaleza y comodidad.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="assets/img/habitacion1.jpeg" class="d-block w-100" alt="Habitación de lujo">
+        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+          <h5>Habitaciones de Lujo</h5>
+          <p>Confort y elegancia en cada uno de nuestros espacios.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controles -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#hotelCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#hotelCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+</div>
+
 <!-- BACKDROP -->
 <div class="modal-backdrop" *ngIf="loginClienteVisible" (click)="cerrarLoginCliente()"></div>
 

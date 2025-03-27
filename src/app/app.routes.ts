@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/login/login.component';
+import { canActivateAdmin } from './guards/admin.guard'; // (Opcional) Proteger el login de admin
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent }, // tu home
-  { path: 'login', component: LoginComponent }, // login administrativo
-  { path: '**', redirectTo: '' }
+  { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent, canActivate: [canActivateAdmin] }, // Accesible solo por URL
+  { path: '**', redirectTo: '' } // Redirección en caso de error
 ];
-
