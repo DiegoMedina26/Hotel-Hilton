@@ -1,0 +1,24 @@
+<div class="container mt-4">
+    <h2>Lista de Reservaciones</h2>
+    <table class="table table-bordered mt-3">
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Habitación</th>
+          <th>Fecha Entrada</th>
+          <th>Fecha Salida</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of reservaciones">
+          <td>{{ r.cliente }}</td>
+          <td>{{ r.habitacion }}</td>
+          <td>{{ r.fechaEntrada }}</td>
+          <td>{{ r.fechaSalida }}</td>
+          <td>{{ r.estado }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

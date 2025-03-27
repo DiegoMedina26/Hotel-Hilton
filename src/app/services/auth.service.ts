@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  // BASE actualizada según Swagger
   private apiUrl = 'http://localhost:8000/api/auth';
   private userUrl = 'http://localhost:8000/api/user';
 
@@ -81,4 +80,20 @@ export class AuthService {
       'Authorization': `Bearer ${token}`
     });
   }
+
+  getUserFromToken(): any {
+    const token = localStorage.getItem('access_token');
+    if (!token) return null;
+  
+    const payload = token.split('.')[1];
+    try {
+      const decoded = JSON.parse(atob(payload));
+      return decoded;
+    } catch (e) {
+      console.error('Error al decodificar el token:', e);
+      return null;
+    }
+  }
+  
+  
 }

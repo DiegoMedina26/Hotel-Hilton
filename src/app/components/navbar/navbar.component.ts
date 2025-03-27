@@ -1,58 +1,67 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common'; 
+import { AuthService } from '/Users/santi/Hotel-Hilton_front/src/app/services/auth.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { LoginModalComponent } from '../login-modal/login-modal.component';
+import { RegistroModalComponent } from '../registro-modal/registro-modal.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, NgIf],
+  imports: [CommonModule, FormsModule, LoginModalComponent, RegistroModalComponent],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
-  loginClienteVisible: boolean = false;
-  usuarioCliente: string = '';
-  passwordCliente: string = '';
-  clienteLogueado = false;
-  nombreCliente = '';
+export class NavbarComponent implements OnInit {
+  usuario: any = null;
+  mostrarLogin: boolean = false;
+  mostrarRegistro: boolean = false;
 
-  
+  constructor(private authService: AuthService, private router: Router) {}
 
-  constructor(private router: Router) {}
-  
-
-  mostrarLoginCliente() {
-    console.log('Mostrando login cliente');
-    this.loginClienteVisible = true;
-  }
-  
-  cerrarLoginCliente() {
-    this.loginClienteVisible = false;
+  ngOnInit(): void {
+    this.actualizarUsuario();
   }
 
-  loginCliente() {
-    // Validación simple (puedes mejorarla)
-    if (this.usuarioCliente === 'cliente' && this.passwordCliente === '1234') {
-      alert('Inicio de sesión exitoso');
-      this.clienteLogueado = true;
-      this.nombreCliente = this.usuarioCliente;  // o un nombre por defecto
-      this.loginClienteVisible = false; // Oculta el modal
-      this.router.navigate(['/cliente-dashboard']); // Cambia a la ruta de tu panel cliente
-    } else {
-      alert('Usuario o contraseña incorrectos');
+  actualizarUsuario(): void {
+    const user = this.authService.getUserFromToken();
+    if (user) {
+      this.usuario = user;
+      console.log('Usuario desde token:', this.usuario); // Debug para verificar el token decodificado
     }
   }
-  
 
-  logoutCliente() {
-    this.clienteLogueado = false;
-    this.nombreCliente = '';
-    this.usuarioCliente = '';
-    this.passwordCliente = '';
+  get nombreParaMostrar(): string {
+    if (!this.usuario) return 'Invitado';
+    return this.usuario.user_name || `${this.usuario.first_name || ''} ${this.usuario.last_name || ''}`.trim() || this.usuario.role || 'Usuario';
   }
-  
-}
 
+  get puedeVerReservas(): boolean {
+    return this.usuario && ['Admin', 'SuperAdmin', 'Empleado_Basic'].includes(this.usuario.role);
+  }
+
+  abrirLogin(): void {
+    this.mostrarLogin = true;
+  }
+
+  cerrarLogin(): void {
+    this.mostrarLogin = false;
+    this.actualizarUsuario();
+  }
+
+  abrirRegistro(): void {
+    this.mostrarRegistro = true;
+  }
+
+  cerrarRegistro(): void {
+    this.mostrarRegistro = false;
+    this.actualizarUsuario();
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.usuario = null;
+    this.router.navigate(['/']);
+  }
+}

@@ -11,19 +11,51 @@
           <a class="nav-link" routerLink="/" routerLinkActive="active">Home</a>
         </li>
 
-        <li class="nav-item" *ngIf="!clienteLogueado">
-          <a class="nav-link" routerLink="/login" routerLinkActive="active">Iniciar Sesión</a>
+        <!-- Si está logueado y es empleado -->
+        <li class="nav-item" *ngIf="puedeVerReservas">
+          <a class="nav-link" routerLink="/reservaciones" routerLinkActive="active">Reservaciones</a>
         </li>
-        
-        <li class="nav-item" *ngIf="!clienteLogueado">
-          <a class="nav-link" routerLink="/registro" routerLinkActive="active">Registrarse</a>
+
+        <!-- No logueado -->
+        <li class="nav-item" *ngIf="!usuario">
+          <a class="nav-link" href="#" (click)="abrirLogin()">Iniciar Sesión</a>
         </li>
-        
-        
+        <li class="nav-item" *ngIf="!usuario">
+          <a class="nav-link" href="#" (click)="abrirRegistro()">Registrarse</a>
+        </li>
+
+        <!-- Mini perfil -->
+        <li class="nav-item dropdown" *ngIf="usuario">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {{ nombreParaMostrar }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" routerLink="/perfil-cliente">Mi Perfil</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#" (click)="logout()">Cerrar sesión</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
 
-<!-- FONDO OSCURO -->
-<div class="modal-backdrop" *ngIf="loginClienteVisible" (click)="cerrarLoginCliente()"></div>
+<!-- Login Modal -->
+<app-login-modal
+  *ngIf="mostrarLogin"
+  [mostrarModal]="mostrarLogin"
+  (cerrar)="cerrarLogin()"
+></app-login-modal>
+
+<!-- Registro Modal -->
+<app-registro-modal
+  *ngIf="mostrarRegistro"
+  [mostrarModal]="mostrarRegistro"
+  (cerrar)="cerrarRegistro()"
+></app-registro-modal>

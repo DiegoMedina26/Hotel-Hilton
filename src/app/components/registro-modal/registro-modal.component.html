@@ -1,0 +1,69 @@
+<div class="modal fade show d-block" tabindex="-1" role="dialog" *ngIf="mostrarModal" style="background-color: rgba(0,0,0,0.5);">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content rounded shadow">
+      <div class="modal-header">
+        <h5 class="modal-title">Registro de Usuario</h5>
+        <button type="button" class="btn-close" (click)="cerrarModal()"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="register()">
+          <div class="mb-3">
+            <label for="identification_number" class="form-label">Número de Identificación</label>
+            <input type="text" class="form-control" id="identification_number" [(ngModel)]="user.identification_number" name="identification_number" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="first_name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="first_name" [(ngModel)]="user.first_name" name="first_name" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="last_name" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="last_name" [(ngModel)]="user.last_name" name="last_name" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo electrónico</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="phone" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" id="phone" [(ngModel)]="user.phone" name="phone" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="address" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="address" [(ngModel)]="user.address" name="address" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="city_id" class="form-label">Ciudad</label>
+            <select class="form-control" id="city_id" [(ngModel)]="user.city_id" name="city_id" required>
+              <option value="" disabled selected>Seleccione una ciudad</option>
+              <option *ngFor="let city of cities" [value]="city.id">{{ city.name }}</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="password" [(ngModel)]="user.password" name="password" required />
+          </div>
+
+          <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Registrarse</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Fondo oscuro -->
+<div class="modal-backdrop fade show" *ngIf="mostrarModal"></div>
+
+  
+  
