@@ -17,11 +17,21 @@ export class NavbarComponent implements OnInit {
   usuario: any = null;
   mostrarLogin: boolean = false;
   mostrarRegistro: boolean = false;
+  loginClienteVisible: boolean = false;
+  usuarioCliente: string = '';
+  passwordCliente: string = '';
+  clienteLogueado = false;
+  nombreCliente = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.actualizarUsuario();
+  }
+
+  mostrarLoginCliente() {
+    console.log('Mostrando login cliente');
+    this.loginClienteVisible = true;
   }
 
   actualizarUsuario(): void {

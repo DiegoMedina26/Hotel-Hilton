@@ -243,20 +243,3 @@
 <!-- BACKDROP -->
 <div class="modal-backdrop" *ngIf="loginClienteVisible" (click)="cerrarLoginCliente()"></div>
 
-<!-- MODAL LOGIN CLIENTE -->
-<div class="modal-login" *ngIf="loginClienteVisible">
-  <div class="card p-4">
-    <h3>Login Cliente</h3>
-    <form (ngSubmit)="loginCliente()" #loginForm="ngForm">
-      <div class="mb-3">
-        <label>Usuario</label>
-        <input type="text" class="form-control" [(ngModel)]="usuarioCliente" name="usuario" required>
-      </div>
-      <div class="mb-3">
-        <label>Contraseña</label>
-        <input type="password" class="form-control" [(ngModel)]="passwordCliente" name="password" required>
-      </div>
-      <button type="submit" class="btn btn-success w-100">Ingresar</button>
-    </form>
-  </div>
-</div>

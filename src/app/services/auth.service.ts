@@ -1,41 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { environment } from '../../environments/environment';
 import { sha256 } from 'js-sha256';
 import { Observable } from 'rxjs';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
   private apiUrl = 'http://localhost:8000/api/auth';
   private userUrl = 'http://localhost:8000/api/user';
 
-  constructor(private http: HttpClient, private router: Router) {}
-
-  // Login cliente
-  loginCliente(email: string, password: string) {
-    return this.http.post(`${this.apiUrl}/login/cliente`, {
-      email: email,
-      password: sha256(password)
-    });
-  }
-
-  // Login empleado
-  loginEmpleado(email: string, password: string) {
-    return this.http.post(`${this.apiUrl}/login/empleado`, {
-      email: email,
-      password: sha256(password)
-    });
-  }
-
-  // Logout
-  logout() {
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
-  }
+  constructor(private http: HttpClient) {}
 
   // Obtener token
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return localStorage.getItem('access_token');
   }
 
   loginCustomer(username: string, password: string): Observable<any> {
@@ -105,5 +84,9 @@ export class AuthService {
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
+  }
+
+  logout(): void {
+    localStorage.removeItem('access_token');
   }
 }
