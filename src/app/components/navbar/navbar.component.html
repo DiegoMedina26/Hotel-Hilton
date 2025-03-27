@@ -10,6 +10,7 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/" routerLinkActive="active">Home</a>
         </li>
+<<<<<<< HEAD
 
         <!-- Si está logueado y es empleado -->
         <li class="nav-item" *ngIf="puedeVerReservas">
@@ -41,11 +42,26 @@
             <li><a class="dropdown-item" href="#" (click)="logout()">Cerrar sesión</a></li>
           </ul>
         </li>
+=======
+        
+        <!-- CLIENTE abre el modal -->
+        <li class="nav-item" *ngIf="!clienteLogueado">
+          <a class="nav-link" (click)="mostrarLoginCliente()">Iniciar Sesión Cliente</a>
+        </li>
+
+        <!-- Cliente logueado -->
+        <li class="nav-item" *ngIf="clienteLogueado">
+          <span class="nav-link">Bienvenido, {{ nombreCliente }}</span>
+          <a class="nav-link text-danger" (click)="logoutCliente()">Cerrar Sesión</a>
+        </li>
+        
+>>>>>>> 9a0462082af953559d73fc0c59a7989ce842568a
       </ul>
     </div>
   </div>
 </nav>
 
+<<<<<<< HEAD
 <!-- Login Modal -->
 <app-login-modal
   *ngIf="mostrarLogin"
@@ -59,3 +75,25 @@
   [mostrarModal]="mostrarRegistro"
   (cerrar)="cerrarRegistro()"
 ></app-registro-modal>
+=======
+<!-- FONDO OSCURO -->
+<div class="modal-backdrop" *ngIf="loginClienteVisible" (click)="cerrarLoginCliente()"></div>
+
+<!-- MODAL CLIENTE -->
+<div class="modal-login" *ngIf="loginClienteVisible">
+  <div class="card p-4">
+    <h3>Login Cliente</h3>
+    <form (ngSubmit)="loginCliente()" #loginForm="ngForm">
+      <div class="mb-3">
+        <label>Usuario</label>
+        <input type="text" class="form-control" [(ngModel)]="usuarioCliente" name="usuario" required>
+      </div>
+      <div class="mb-3">
+        <label>Contraseña</label>
+        <input type="password" class="form-control" [(ngModel)]="passwordCliente" name="password" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+    </form>
+  </div>
+</div>
+>>>>>>> 9a0462082af953559d73fc0c59a7989ce842568a

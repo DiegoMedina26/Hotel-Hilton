@@ -1,20 +1,16 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { AuthService } from '/Users/santi/Hotel-Hilton_front/src/app/services/auth.service'; 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthGuard implements CanActivate {
+import { AuthService } from '../services/auth.service';
 
-  constructor(private authService: AuthService, private router: Router) {}
+@Injectable({ providedIn: 'root' })
+export class AuthGuard implements CanActivate {
+  constructor(private auth: AuthService, private router: Router) {}
 
   canActivate(): boolean {
-    const token = this.authService.getToken();
-    if (token) {
-      return true;
-    } else {
+    if (!this.auth.getToken()) {
       this.router.navigate(['/login']);
       return false;
     }
+    return true;
   }
 }
