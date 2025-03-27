@@ -1,38 +1,84 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { environment } from '../../environments/environment';
-import { sha256 } from 'js-sha256';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
-  private apiUrl = `${environment.apiUrl}/auth`;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  // BASE actualizada según Swagger
+  private apiUrl = 'http://localhost:8000/api/auth';
+  private userUrl = 'http://localhost:8000/api/user';
+
+  constructor(private http: HttpClient) {}
 
   // Login cliente
-  loginCliente(email: string, password: string) {
-    return this.http.post(`${this.apiUrl}/login/cliente`, {
-      email: email,
-      password: sha256(password)
+  loginCustomer(username: string, password: string): Observable<any> {
+    const body = new HttpParams()
+      .set('username', username)
+      .set('password', password);
+
+    return this.http.post(`${this.apiUrl}/signin/customer`, body.toString(), {
+      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
     });
   }
 
   // Login empleado
-  loginEmpleado(email: string, password: string) {
-    return this.http.post(`${this.apiUrl}/login/empleado`, {
-      email: email,
-      password: sha256(password)
+  loginEmployee(username: string, password: string): Observable<any> {
+    const body = new HttpParams()
+      .set('username', username)
+      .set('password', password);
+
+    return this.http.post(`${this.apiUrl}/signin/employee`, body.toString(), {
+      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
     });
   }
 
-  // Logout
-  logout() {
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
+  // Registro cliente
+  signupCustomer(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/signup/customer`, data);
+  }
+
+  // Registro empleado
+  signupEmployee(data: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/signup/employee`, data);
+  }
+
+  // Obtener perfil de cliente autenticado
+  getCustomerProfile(): Observable<any> {
+    return this.http.get(`${this.userUrl}/cliente/perfil`, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+  // Obtener perfil de empleado autenticado
+  getEmployeeProfile(): Observable<any> {
+    return this.http.get(`${this.userUrl}/empleado/perfil`, {
+      headers: this.getAuthHeaders()
+    });
+  }
+
+  // Guardar token en localStorage
+  saveToken(token: string): void {
+    localStorage.setItem('access_token', token);
   }
 
   // Obtener token
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return localStorage.getItem('access_token');
+  }
+
+  // Borrar token
+  logout(): void {
+    localStorage.removeItem('access_token');
+  }
+
+  // Encabezado con token
+  private getAuthHeaders(): HttpHeaders {
+    const token = this.getToken();
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
   }
 }
