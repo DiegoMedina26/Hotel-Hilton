@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '/Users/santi/Hotel-Hilton_front/src/app/services/auth.service';
-import { CityService } from '/Users/santi/Hotel-Hilton_front/src/app/services/city.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { CityService } from '../../services/city.service';
 
 @Component({
   selector: 'app-registro-modal',
