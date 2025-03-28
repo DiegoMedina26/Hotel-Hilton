@@ -26,21 +26,14 @@ export class LoginModalComponent {
     this.authService.loginCustomer(this.usuario, this.password).subscribe({
       next: (res) => {
         this.authService.saveToken(res.access_token);
-        this.cerrarModalYRedirigir('/');
+        this.cerrarModalYRedirigir('/perfil-cliente');
       },
-      error: () => {
-        this.authService.loginEmployee(this.usuario, this.password).subscribe({
-          next: (res) => {
-            this.authService.saveToken(res.access_token);
-            this.cerrarModalYRedirigir('/');
-          },
           error: () => {
             this.error = 'Usuario o contraseña incorrectos.';
           }
         });
       }
-    });
-  }
+
 
   cerrarModal(): void {
     this.cerrar.emit();

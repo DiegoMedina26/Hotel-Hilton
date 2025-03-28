@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '/Users/santi/Hotel-Hilton_front/src/app/services/auth.service';
+import { AuthService } from 'Hilton_front/src/app/services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({

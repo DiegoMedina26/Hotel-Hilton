@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '/Users/santi/Hotel-Hilton_front/src/app/services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,27 +15,21 @@ export class LoginComponent {
   password: string = '';
   error: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   login(): void {
     this.error = '';
-    this.authService.loginCustomer(this.usuario, this.password).subscribe({
+    this.authService.loginEmployee(this.usuario, this.password).subscribe({
       next: (res) => {
         this.authService.saveToken(res.access_token);
-        this.router.navigate(['/perfil-cliente']);
+        this.router.navigate(['/perfil-empleado']);
       },
       error: () => {
-        this.authService.loginEmployee(this.usuario, this.password).subscribe({
-          next: (res) => {
-            this.authService.saveToken(res.access_token);
-            this.router.navigate(['/perfil-empleado']);
-          },
-          error: () => {
-            this.error = 'Usuario o contraseña incorrectos.';
-          }
-        });
+        this.error = 'Usuario o contraseña incorrectos.';
       }
     });
   }
 }
+
+
 

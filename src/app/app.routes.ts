@@ -7,10 +7,12 @@ import { PerfilEmpleadoComponent } from './components/perfil-empleado/perfil-emp
 import { AuthGuard } from './guards/auth.guard';
 import { ReservacionesComponent } from './components/reservaciones/reservaciones.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
-import { AdminGuard } from './guards/admin.guard'; // (Opcional) Protección
+import { AdminGuard } from './guards/admin.guard'; 
+import { LoginComponent } from './components/login/login.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'login-empleado', component: LoginComponent },
   { path: 'login', component: LoginModalComponent },
   { path: 'registro', component: RegistroModalComponent },
   { path: 'reservaciones', component: ReservacionesComponent },

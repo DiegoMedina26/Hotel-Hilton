@@ -40,13 +40,6 @@
             <li><a class="dropdown-item" href="#" (click)="logout()">Cerrar sesión</a></li>
           </ul>
         </li>
-        <!-- CLIENTE abre el modal -->
-        <li class="nav-item" *ngIf="!clienteLogueado">
-          <a class="nav-link" (click)="mostrarLoginCliente()">Iniciar Sesión Cliente</a>
-        </li>
-        <li class="nav-item" *ngIf="!clienteLogueado">
-          <a class="nav-link" routerLink="/registro" routerLinkActive="active">Registrarse</a>
-        </li>
       </ul>
     </div>
   </div>
