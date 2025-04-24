@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CityService } from '../../services/city.service';
+import { sha256 } from 'js-sha256';
 
 @Component({
   selector: 'app-registro-modal',
@@ -26,6 +27,7 @@ export class RegistroModalComponent implements OnInit {
     password: ''
   };
 
+  countries: any[] = [];
   cities: any[] = [];
   error: string = '';
 
@@ -36,23 +38,36 @@ export class RegistroModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cargarCiudades();
+    this.loadCountries();
   }
 
-  cargarCiudades(): void {
-    this.cityService.getCities().subscribe({
-      next: (data) => {
-        this.cities = data;
-      },
+  loadCountries(): void {
+    this.cityService.getCountries().subscribe({
+      next: (data:any) => (this.countries = data),
       error: (err) => {
-        console.error('Error al cargar ciudades', err);
-        this.error = 'Error al cargar las ciudades. Intenta nuevamente.';
+        console.error('Error al cargar países', err);
+        this.error = 'Error al cargar los países.';
       }
     });
+  }
+ 
+  loadCities(): void {
+    if (this.user.country_id) {
+      this.cityService.getCitiesByCountry(this.user.country_id).subscribe({
+        next: (data) => (this.cities = data),
+        error: (err) => {
+          console.error('Error al cargar ciudades', err);
+          this.error = 'Error al cargar las ciudades.';
+        }
+      });
+    } else {
+      this.cities = [];
+    }
   }
 
   register(): void {
     this.error = '';
+    this.user.password = sha256(this.user.password);
     this.authService.signupCustomer(this.user).subscribe({
       next: () => {
         alert('Usuario registrado con éxito');

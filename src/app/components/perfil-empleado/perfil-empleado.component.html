@@ -1,5 +1,16 @@
 <div class="container mt-5">
-    <h2>Perfil del Empleado</h2>
-    <p>{{ mensaje }}</p>
-    <p *ngIf="usuarioId">ID de usuario: {{ usuarioId }}</p>
+  <h2>Perfil del Empleado</h2>
+
+  
+  <div *ngIf="usuario; else noUsuario">
+    <p><strong>Nombre:</strong> {{ usuario.first_name }} {{ usuario.last_name }}</p>
+    <p><strong>Correo:</strong> {{ usuario.email }}</p>
+    <p><strong>Role:</strong> {{ usuario.role }}</p>
+
   </div>
+
+  
+  <ng-template #noUsuario>
+    <p class="text-danger">No se encontró información del usuario.</p>
+  </ng-template>
+</div>

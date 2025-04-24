@@ -48,14 +48,14 @@ export class AuthService {
 
   // Obtener perfil de cliente autenticado
   getCustomerProfile(): Observable<any> {
-    return this.http.get(`${this.userUrl}/cliente/perfil`, {
+    return this.http.get(`${this.userUrl}/customer/profile`, {
       headers: this.getAuthHeaders()
     });
   }
 
 
   getEmployeeProfile(): Observable<any> {
-    return this.http.get(`${this.userUrl}/empleado/perfil`, {
+    return this.http.get(`${this.userUrl}/employeed/profile`, {
       headers: this.getAuthHeaders()
     });
   }

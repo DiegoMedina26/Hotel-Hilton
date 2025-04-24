@@ -9,8 +9,15 @@ export class CityService {
   private baseUrl = 'http://localhost:8000/api/locations'; 
   constructor(private http: HttpClient) {}
 
-  getCities(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/cities`);
+
+  getCountries(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/countries`);
   }
+
+  getCitiesByCountry(countryId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/cities/${countryId}`);
+  }
+
+  
 }
 

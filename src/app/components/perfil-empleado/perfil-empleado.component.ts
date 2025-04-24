@@ -10,20 +10,15 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './perfil-empleado.component.html',
 })
 export class PerfilEmpleadoComponent implements OnInit {
-  mensaje: string = '';
-  usuarioId: number | null = null;
+  usuario: any = undefined;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.authService.getEmployeeProfile().subscribe({
       next: (data) => {
-        this.mensaje = data.message;
-        this.usuarioId = data.usuario_id;
+        this.usuario = data;
       },
-      error: () => {
-        this.mensaje = 'Error al obtener el perfil.';
-      }
     });
   }
 }
