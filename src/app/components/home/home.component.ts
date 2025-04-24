@@ -24,6 +24,8 @@ export class HomeComponent {
   checkout: string = '';
   habitaciones: number = 1;
   huespedes: number = 1;
+  hotelSeleccionado: string = '';
+
 
   constructor(private router: Router) {}
 
@@ -64,7 +66,8 @@ export class HomeComponent {
         checkin: this.checkin,
         checkout: this.checkout,
         habitaciones: this.habitaciones,
-        huespedes: this.huespedes
+        huespedes: this.huespedes,
+        hotel: this.hotelSeleccionado
       }
     });
   }

@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { LoginModalComponent } from './components/login-modal/login-modal.component';
 import { RegistroModalComponent } from './components/registro-modal/registro-modal.component';
 import { HomeComponent } from './components/home/home.component';
@@ -9,6 +10,8 @@ import { ReservacionesComponent } from './components/reservaciones/reservaciones
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { AdminGuard } from './guards/admin.guard'; 
 import { LoginComponent } from './components/login/login.component';
+import { ResultadosComponent } from './components/resultados/resultados.component';
+import { ConfirmacionReservaComponent } from './components/confirmacion-reserva/confirmacion-reserva.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,4 +22,6 @@ export const routes: Routes = [
   { path: 'perfil-cliente', component: PerfilClienteComponent, canActivate: [AuthGuard] },
   { path: 'perfil-empleado', component: PerfilEmpleadoComponent, canActivate: [AuthGuard] },
   { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AdminGuard] }, // Protegido
+  { path: 'resultados', component: ResultadosComponent },
+  { path: 'confirmacion-reserva', component: ConfirmacionReservaComponent},
 ];
