@@ -31,12 +31,9 @@
             <a class="btn btn-primary"
               [routerLink]="['/confirmacion-reserva']"
               [queryParams]="{
-                hotel: destinoid,
-                destino: destinoid,
+                roomid: room.id,
                 checkin: checkin,
                 checkout: checkout,
-                huespedes: huespedes,
-                habitaciones: habitaciones,
                 numeroHabitacion: room.number,
                 precio: room.price_per_night
               }">

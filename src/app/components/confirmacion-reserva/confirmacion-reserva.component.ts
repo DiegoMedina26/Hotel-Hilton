@@ -11,28 +11,22 @@ import { ReservationService } from '../../services/reservations.service';
   styleUrls: ['./confirmacion-reserva.component.css']
 })
 export class ConfirmacionReservaComponent implements OnInit {
-  hotel: string = '';
-  destino: string = '';
+  roomid: string = '';
   checkin: string = '';
   checkout: string = '';
-  huespedes: number = 1;
-  habitaciones: number = 1;
-  tipoHabitacion: string = '';
-  precio: number = 0;
+  numeroHabitacion: string = '';
+  precio: string = '';
 
   constructor(private route: ActivatedRoute, private reservationService: ReservationService) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       console.log('QueryParams:', params); 
-      this.hotel = params['hotel'] || 'Hotel sin nombre';
-      this.destino = params['destino'] || '';
+      this.roomid = params['roomid'] || '';
       this.checkin = params['checkin'] || '';
       this.checkout = params['checkout'] || '';
-      this.huespedes = +params['huespedes'] || 1;
-      this.habitaciones = +params['habitaciones'] || 1;
-      this.tipoHabitacion = params['tipoHabitacion'] || '';
-      this.precio = +params['precio'] || 0;
+      this.numeroHabitacion = params['numeroHabitacion'] || '';
+      this.precio = params['precio'] || '';
     });
   }
 }
