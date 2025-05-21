@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ReservationService } from '../../services/reservations.service';
+import { Reservation, ReservationService } from '../../services/reservations.service';
 
 @Component({
   selector: 'app-confirmacion-reserva',
@@ -17,6 +17,9 @@ export class ConfirmacionReservaComponent implements OnInit {
   numeroHabitacion: string = '';
   precio: string = '';
 
+  mostrandoPasarela = false;
+  mensaje = '';
+
   constructor(private route: ActivatedRoute, private reservationService: ReservationService) {}
 
   ngOnInit(): void {
@@ -29,4 +32,29 @@ export class ConfirmacionReservaComponent implements OnInit {
       this.precio = params['precio'] || '';
     });
   }
+
+  confirmarYPagar() {
+    this.mostrandoPasarela = true;
+    this.mensaje = '';
+
+    // Simula procesamiento del pago (3 segundos)
+    setTimeout(() => {
+      this.mostrandoPasarela = false;
+      const current = new Date()
+      // Armar payload para enviar
+      const reserva: Reservation = {
+        roomId: this.roomid,
+        checkInDate: this.checkin,
+        checkOutDate: this.checkout,
+        reservationNumber: `RES-${current.getFullYear()}-${current.getTime()}` ,
+        statusId: '728d893c-d09b-4bf2-8387-6c50064774cd'
+      };
+
+      this.reservationService.reserve(reserva).subscribe({
+        next: () => this.mensaje = '¡Reserva confirmada exitosamente!',
+        error: () => this.mensaje = 'Error al confirmar la reserva. Intente de nuevo.'
+      });
+    }, 3000);
+  }
+
 }

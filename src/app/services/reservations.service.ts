@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
 
-interface Reservation {
+export interface Reservation {
   checkInDate: string;
   checkOutDate: string;
   reservationNumber: string;
@@ -20,29 +20,22 @@ export class ReservationService {
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  reserve(reservarion: Reservation): Observable<any> {
-    const user = this.authService.getUserFromToken()
-    const {
-      checkInDate,
-      checkOutDate,
-      reservationNumber,
-      roomId,
-      statusId,
-    } = reservarion;
+  reserve(reservation: Reservation): Observable<any> {
+    const user = this.authService.getUserFromToken();
+    const { checkInDate, checkOutDate, reservationNumber, roomId, statusId } =
+      reservation;
 
-    const body = new HttpParams()
-      .set('check_in_date', checkInDate)
-      .set('check_out_date', checkOutDate)
-      .set('customer_id', user.id)
-      .set('reservation_number', reservationNumber)
-      .set('room_id', roomId)
-      .set('status_id', statusId);
+    const body = {
+      check_in_date: checkInDate || '',
+      check_out_date: checkOutDate || '',
+      customer_id: user.id || '',
+      reservation_number: reservationNumber || '',
+      room_id: roomId || '',
+      status_id: statusId || '',
+    };
 
-    return this.http.post(this.reservationsUrl, body.toString(), {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-      }),
+    return this.http.post(this.reservationsUrl, body, {
+      headers: this.authService.getAuthHeaders()
     });
   }
-
 }
