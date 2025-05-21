@@ -12,41 +12,38 @@
   <!-- Mostrar hoteles y sus habitaciones -->
   <div *ngIf="hoteles.length > 0; else noResults">
     <div class="list-group">
-      <div class="list-group-item mb-4" *ngFor="let hotel of hoteles">
-        <h5>{{ hotel.nombre }}</h5>
-        <p>{{ hotel.descripcion }}</p>
+      <h5>{{ destinoname }}</h5>
+      <p>{{ destinoaddress }}</p>
+      <p>{{ destinophone }}</p>
+      <div class="list-group-item mb-4" *ngFor="let room of rooms">
 
         <h6 class="mt-3">Habitaciones disponibles:</h6>
-        <div class="row">
-          <div class="col-md-6 mb-3" *ngFor="let habitacion of hotel.habitaciones">
-            <div class="card">
-              <img [src]="habitacion.imagen" class="card-img-top" alt="Imagen habitación {{ habitacion.tipo }}">
-              <div class="card-body">
-                <h5 class="card-title">{{ habitacion.tipo }}</h5>
-                <p class="card-text">{{ habitacion.descripcion }}</p>
-                <p class="card-text">
-                  <strong>Capacidad:</strong> {{ habitacion.capacidad }} personas<br>
-                  <strong>Precio:</strong> ${{ habitacion.precio }} por noche
-                </p>
-                <a class="btn btn-primary"
-                   [routerLink]="['/confirmacion-reserva']"
-                   [queryParams]="{
-                     hotel: hotel.nombre,
-                     destino: destinoid,
-                     checkin: checkin,
-                     checkout: checkout,
-                     huespedes: huespedes,
-                     habitaciones: habitaciones,
-                     tipoHabitacion: habitacion.tipo,
-                     precio: habitacion.precio
-                   }">
-                  Reservar
-                </a>
-              </div>
-            </div>
+        <div class="card">
+          <img [src]="room.image_url" class="card-img-top" alt="Imagen habitación {{ room.number }}">
+          <div class="card-body">
+            <h5 class="card-title">Habitación {{ room.number }}</h5>
+            <p class="card-text">{{ room.description }}</p>
+            <p class="card-text">
+              <strong>Tamaño:</strong> {{ room.size }} m²<br>
+              <strong>Precio:</strong> ${{ room.price_per_night }} por noche<br>
+              <strong>Impuesto:</strong> ${{ room.tax }}
+            </p>
+            <a class="btn btn-primary"
+              [routerLink]="['/confirmacion-reserva']"
+              [queryParams]="{
+                hotel: destinoid,
+                destino: destinoid,
+                checkin: checkin,
+                checkout: checkout,
+                huespedes: huespedes,
+                habitaciones: habitaciones,
+                numeroHabitacion: room.number,
+                precio: room.price_per_night
+              }">
+              Reservar
+            </a>
           </div>
         </div>
-
       </div>
     </div>
   </div>

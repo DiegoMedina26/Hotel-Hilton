@@ -13,6 +13,8 @@ import { CityService } from '../../services/city.service';
 export class ResultadosComponent implements OnInit {
   destinoid: string = '';
   destinoname: string = '';
+  destinoaddress: string = '';
+  destinophone: string = '';
   checkin: string = '';
   checkout: string = '';
   habitaciones: number = 1;
@@ -57,7 +59,7 @@ export class ResultadosComponent implements OnInit {
     },
   ];
 
-  locations: any[] = [];
+  rooms: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -65,13 +67,11 @@ export class ResultadosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.locationService.getLocations().subscribe((data: any[]) => {
-      this.locations = data;
-    });
-
     this.route.queryParams.subscribe((params) => {
       this.destinoid = params['destinoid'] || '';
       this.destinoname = params['destinoname'] || '';
+      this.destinoaddress = params['destinoaddress'] || '';
+      this.destinophone = params['destinophone'] || '';
       this.checkin = params['checkin'] || '';
       this.checkout = params['checkout'] || '';
       this.habitaciones = +params['habitaciones'] || 1;
@@ -83,5 +83,11 @@ export class ResultadosComponent implements OnInit {
         this.hoteles[0].nombre = nombreHotel;
       }
     });
+
+    this.locationService
+      .getRoomsByLocation(this.destinoid)
+      .subscribe((data: any[]) => {
+        this.rooms = data;
+      });
   }
 }

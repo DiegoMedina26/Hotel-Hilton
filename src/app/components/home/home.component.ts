@@ -72,6 +72,8 @@ export class HomeComponent {
       queryParams: {
         destinoid: this.destino.id,
         destinoname: this.destino.name,
+        destinoaddress: this.destino.address,
+        destinophone: this.destino.phone,
         checkin: this.checkin,
         checkout: this.checkout,
         habitaciones: this.habitaciones,
