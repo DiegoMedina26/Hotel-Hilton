@@ -19,6 +19,13 @@ export class CityService {
     return this.http.get<any[]>(`${this.baseUrl}/cities/${countryId}`);
   }
 
+  getRoomsByLocation(locationId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/${locationId}/rooms`)
+  }
+
+  getLocations(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/all`)
+  }
   
 }
 

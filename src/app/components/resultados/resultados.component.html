@@ -2,7 +2,7 @@
   <h3>Resultados de búsqueda</h3>
 
   <div>
-    <p><strong>Destino:</strong> {{ destino }}</p>
+    <p><strong>Destino:</strong> {{ destinoname }}</p>
     <p><strong>Check-in:</strong> {{ checkin }}</p>
     <p><strong>Check-out:</strong> {{ checkout }}</p>
     <p><strong>Habitaciones:</strong> {{ habitaciones }}</p>
@@ -32,7 +32,7 @@
                    [routerLink]="['/confirmacion-reserva']"
                    [queryParams]="{
                      hotel: hotel.nombre,
-                     destino: destino,
+                     destino: destinoid,
                      checkin: checkin,
                      checkout: checkout,
                      huespedes: huespedes,

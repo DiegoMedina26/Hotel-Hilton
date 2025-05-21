@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ReservationService } from '../../services/reservations.service';
 
 @Component({
   selector: 'app-confirmacion-reserva',
@@ -19,7 +20,7 @@ export class ConfirmacionReservaComponent implements OnInit {
   tipoHabitacion: string = '';
   precio: number = 0;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private reservationService: ReservationService) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {

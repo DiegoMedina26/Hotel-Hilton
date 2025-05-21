@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CityService } from '../../services/city.service';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
+  locations: any[] = [];
 
   // Variables de Login
   loginClienteVisible = false;
@@ -19,7 +21,7 @@ export class HomeComponent {
   nombreCliente = '';
 
   // Variables de búsqueda de hotel
-  destino: string = '';
+  destino: any = null;
   checkin: string = '';
   checkout: string = '';
   habitaciones: number = 1;
@@ -27,7 +29,13 @@ export class HomeComponent {
   hotelSeleccionado: string = '';
 
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private locationService: CityService) {}
+
+  ngOnInit(): void {
+    this.locationService.getLocations().subscribe((data: any[]) => {
+      this.locations = data;
+    });
+  }
 
   // Mostrar login
   mostrarLoginCliente() {
@@ -62,7 +70,8 @@ export class HomeComponent {
   buscarHotel() {
     this.router.navigate(['/resultados'], { 
       queryParams: {
-        destino: this.destino,
+        destinoid: this.destino.id,
+        destinoname: this.destino.name,
         checkin: this.checkin,
         checkout: this.checkout,
         habitaciones: this.habitaciones,
