@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, FormsModule, LoginModalComponent, RegistroModalComponent],
+  imports: [CommonModule, FormsModule, LoginModalComponent, RegistroModalComponent, RouterLink],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
