@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Reservation, ReservationService } from '../../services/reservations.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-confirmacion-reserva',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './confirmacion-reserva.component.html',
   styleUrls: ['./confirmacion-reserva.component.css']
 })
@@ -16,6 +17,11 @@ export class ConfirmacionReservaComponent implements OnInit {
   checkout: string = '';
   numeroHabitacion: string = '';
   precio: string = '';
+
+  nombreTitular: string = '';
+  numeroTarjeta: string = '';
+  vencimiento: string = '';
+  cvv: string = '';
 
   mostrandoPasarela = false;
   mensaje = '';
@@ -33,6 +39,13 @@ export class ConfirmacionReservaComponent implements OnInit {
     });
   }
 
+  formularioValido(): boolean {
+    return this.nombreTitular !== '' &&
+           this.numeroTarjeta !== '' &&
+           this.vencimiento !== '' &&
+           this.cvv !== '';
+  }
+
   confirmarYPagar() {
     this.mostrandoPasarela = true;
     this.mensaje = '';
@@ -46,7 +59,7 @@ export class ConfirmacionReservaComponent implements OnInit {
         roomId: this.roomid,
         checkInDate: this.checkin,
         checkOutDate: this.checkout,
-        reservationNumber: `RES-${current.getFullYear()}-${current.getTime()}` ,
+        reservationNumber: `RES-${current.getFullYear()}-${current.getMonth()}${current.getDay()}` ,
         statusId: '728d893c-d09b-4bf2-8387-6c50064774cd'
       };
 
