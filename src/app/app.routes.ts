@@ -12,6 +12,7 @@ import { AdminGuard } from './guards/admin.guard';
 import { LoginComponent } from './components/login/login.component';
 import { ResultadosComponent } from './components/resultados/resultados.component';
 import { ConfirmacionReservaComponent } from './components/confirmacion-reserva/confirmacion-reserva.component';
+import { PasarelaOpcionesComponent } from './components/pasarela-opciones/pasarela-opciones.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,4 +25,5 @@ export const routes: Routes = [
   { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [AdminGuard] }, // Protegido
   { path: 'resultados', component: ResultadosComponent },
   { path: 'confirmacion-reserva', component: ConfirmacionReservaComponent},
+  { path: 'pasarela-opciones', component: PasarelaOpcionesComponent},
 ];

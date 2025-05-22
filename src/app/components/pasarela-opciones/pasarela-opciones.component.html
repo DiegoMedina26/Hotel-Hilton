@@ -1,0 +1,18 @@
+<div class="p-4 shadow bg-white rounded">
+  <h2>Confirmación de pago</h2>
+
+  <p><strong>Número de Reserva:</strong> {{ reserva.reservationNumber }}</p>
+
+  <button
+    class="btn btn-primary m-2"
+    (click)="pagarConStatus('1111-1111-1111-1111')"
+  >
+    Confirmar Pago
+  </button>
+  <button
+    class="btn btn-danger m-2"
+    (click)="pagarConStatus('2222-2222-2222-2222')"
+  >
+    Cancelar Reserva
+  </button>
+</div>

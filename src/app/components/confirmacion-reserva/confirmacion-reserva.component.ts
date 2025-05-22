@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Reservation, ReservationService } from '../../services/reservations.service';
+import {
+  Reservation,
+  ReservationService,
+} from '../../services/reservations.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -9,7 +12,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './confirmacion-reserva.component.html',
-  styleUrls: ['./confirmacion-reserva.component.css']
+  styleUrls: ['./confirmacion-reserva.component.css'],
 })
 export class ConfirmacionReservaComponent implements OnInit {
   roomid: string = '';
@@ -26,11 +29,15 @@ export class ConfirmacionReservaComponent implements OnInit {
   mostrandoPasarela = false;
   mensaje = '';
 
-  constructor(private route: ActivatedRoute, private reservationService: ReservationService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private reservationService: ReservationService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      console.log('QueryParams:', params); 
+    this.route.queryParams.subscribe((params) => {
+      console.log('QueryParams:', params);
       this.roomid = params['roomid'] || '';
       this.checkin = params['checkin'] || '';
       this.checkout = params['checkout'] || '';
@@ -40,10 +47,12 @@ export class ConfirmacionReservaComponent implements OnInit {
   }
 
   formularioValido(): boolean {
-    return this.nombreTitular !== '' &&
-           this.numeroTarjeta !== '' &&
-           this.vencimiento !== '' &&
-           this.cvv !== '';
+    return (
+      this.nombreTitular !== '' &&
+      this.numeroTarjeta !== '' &&
+      this.vencimiento !== '' &&
+      this.cvv !== ''
+    );
   }
 
   confirmarYPagar() {
@@ -53,21 +62,24 @@ export class ConfirmacionReservaComponent implements OnInit {
     // Simula procesamiento del pago (3 segundos)
     setTimeout(() => {
       this.mostrandoPasarela = false;
-      const current = new Date()
+      const current = new Date();
       // Armar payload para enviar
       const reserva: Reservation = {
         roomId: this.roomid,
         checkInDate: this.checkin,
         checkOutDate: this.checkout,
-        reservationNumber: `RES-${current.getFullYear()}-${current.getMonth()}${current.getDay()}` ,
-        statusId: '728d893c-d09b-4bf2-8387-6c50064774cd'
+        reservationNumber: `RES-${current.getFullYear()}-${Math.floor(Math.random()*9999)}`,
+        statusId: '728d893c-d09b-4bf2-8387-6c50064774cd',
       };
 
       this.reservationService.reserve(reserva).subscribe({
-        next: () => this.mensaje = '¡Reserva confirmada exitosamente!',
-        error: () => this.mensaje = 'Error al confirmar la reserva. Intente de nuevo.'
+        next: () => {
+          // Navegar a la pasarela con datos
+          this.router.navigate(['/pasarela-opciones'], { state: { reserva } });
+        },
+        error: () =>
+          (this.mensaje = 'Error al confirmar la reserva. Intente de nuevo.'),
       });
     }, 3000);
   }
-
 }
